@@ -20,10 +20,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/dark/3d-trilateration/trilateration"
 )
 
 func main() {
 	fmt.Println("Hello, world.")
-	trilateration.Foo()
 }
