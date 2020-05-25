@@ -78,9 +78,11 @@ func main() {
 	}
 
 	fmt.Println("Initial guess:", g)
+	fmt.Println("Sum of squares:", trilateration.SumOfResidualSquares(obs, g))
 	for i := 0; i < 100; i += 1 {
 		fmt.Println("\nIteration:", i)
 		g = trilateration.GaussNetwonIteration(obs, g)
 		fmt.Println("   New guess:", g)
+		fmt.Println("   Sum of squares:", trilateration.SumOfResidualSquares(obs, g))
 	}
 }

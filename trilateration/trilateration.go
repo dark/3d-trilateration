@@ -23,6 +23,7 @@
 package trilateration
 
 import (
+	"math"
 	"gonum.org/v1/gonum/mat"
 )
 
@@ -52,6 +53,15 @@ func residuals(observations []Range, current_guess Point) *mat.VecDense {
 	}
 
 	return r
+}
+
+// Returns the sum of the squares of the residuals.
+func SumOfResidualSquares(observations []Range, current_guess Point) (sum_of_squares float64) {
+	for _, observation := range observations {
+		distance := Distance(observation.Station, current_guess)
+		sum_of_squares += math.Pow(observation.Distance-distance, 2)
+	}
+	return
 }
 
 // Implements one iteration of the Gauss–Newton algorithm
