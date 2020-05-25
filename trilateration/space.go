@@ -29,6 +29,13 @@ type Point struct {
 	Z float64
 }
 
+// Representation of a range, as distance from a given starting point
+// (called 'station').
+type Range struct {
+	Station  Point
+	Distance float64
+}
+
 // Computes the distance between two points in a 3D space.
 func Distance(p1, p2 Point) float64 {
 	return math.Sqrt(math.Pow(p1.X-p2.X, 2) + math.Pow(p1.Y-p2.Y, 2) + math.Pow(p1.Z-p2.Z, 2))
