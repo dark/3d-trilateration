@@ -57,7 +57,7 @@ func residuals(observations []Range, current_guess Point) *mat.VecDense {
 // Implements one iteration of the Gauss–Newton algorithm
 // (https://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm), as
 // applied to true range multilateration. Returns the new guess.
-func gaussNetwonIteration(observations []Range, current_guess Point) Point {
+func GaussNetwonIteration(observations []Range, current_guess Point) Point {
 	// The variable names in this function mirror those from the Wikipedia article.
 
 	// Current guess of the algorithm
