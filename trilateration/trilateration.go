@@ -23,8 +23,8 @@
 package trilateration
 
 import (
-	"math"
 	"gonum.org/v1/gonum/mat"
+	"math"
 )
 
 // Returns the Jacobian matrix of the residuals function. The matrix
