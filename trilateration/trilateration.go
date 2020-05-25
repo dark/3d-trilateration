@@ -80,9 +80,9 @@ func GaussNetwonIteration(observations []Range, current_guess Point) Point {
 	r := residuals(observations, current_guess)
 
 	// Compute and return the new guess.
-	var subtrahend mat.VecDense
-	subtrahend.MulVec(&left_pseudoinverse, r)
-	beta_s.SubVec(beta_s, &subtrahend)
+	var addend mat.VecDense
+	addend.MulVec(&left_pseudoinverse, r)
+	beta_s.AddVec(beta_s, &addend)
 
 	return Point{X: beta_s.AtVec(0), Y: beta_s.AtVec(1), Z: beta_s.AtVec(2)}
 }

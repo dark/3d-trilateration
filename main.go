@@ -33,7 +33,7 @@ func main() {
 				Y: -41.71875,
 				Z: -10613.03125,
 			},
-			14236.89,
+			14263.89,
 		},
 		{
 			trilateration.Point{
@@ -79,7 +79,7 @@ func main() {
 
 	fmt.Println("Initial guess:", g)
 	for i := 0; i < 100; i += 1 {
-		fmt.Println("Iteration:", i)
+		fmt.Println("\nIteration:", i)
 		g = trilateration.GaussNetwonIteration(obs, g)
 		fmt.Println("   New guess:", g)
 	}
