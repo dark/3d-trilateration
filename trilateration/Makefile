@@ -1,0 +1,2 @@
+trilateration:
+	go build

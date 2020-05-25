@@ -1,0 +1,35 @@
+/*
+ *  A library for three-dimensional space trilateration
+ *  Copyright (C) 2020  Marco Leogrande
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+package trilateration
+
+import (
+	"math"
+)
+
+// Cartesian coordinates of a Point in a 3D space.
+type Point struct {
+	X float64
+	Y float64
+	Z float64
+}
+
+// Computes the distance between two points in a 3D space.
+func Distance(p1, p2 Point) float64 {
+	return math.Sqrt(math.Pow(p1.X-p2.X, 2) + math.Pow(p1.Y-p2.Y, 2) + math.Pow(p1.Z-p2.Z, 2))
+}
