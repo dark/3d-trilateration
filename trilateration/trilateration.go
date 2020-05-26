@@ -108,6 +108,12 @@ func GaussNetwonIteration(observations []Range, current_guess Point) Point {
 // of the solution when the algorithm converged. Please note that, for
 // some combinations of the input parameters, the algorithm might
 // never converge.
+//
+// The choice of the initial guess is very important for the
+// convergence of the algorithm. Some choices might render the problem
+// ill-conditioned. As such, this library provides some helper APIs
+// that can help randomize the choice of the initial guess; please
+// refer to space.go for more details.
 func Trilaterate(observations []Range, initial_guess Point, max_iterations int, min_sum_of_residual_squares float64) Point {
 	guess := initial_guess
 	for iteration := 1; ; iteration += 1 {
