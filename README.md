@@ -8,6 +8,6 @@ locations are already known. A more thorough explanation is available
 at the [Wikipedia page for "True range
 multilateration"](https://en.wikipedia.org/wiki/True_range_multilateration).
 
-The implementation uses the [Gauss–Newton
+The implementation uses the [Gauss-Newton
 algorithm](https://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm)
 to iteratively look for estimates that are closer and closer to the solution.
