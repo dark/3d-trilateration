@@ -24,7 +24,7 @@ import (
 )
 
 // Parametrized function to test the random selection of a point in a
-// cubic range around the origin.
+// cubic range around a center point.
 func testCubicRange(t *testing.T, center Point, distance float64) {
 	fmt.Print("Testing cubic range around point:", center)
 	fmt.Println(" with distance:", distance)
@@ -64,4 +64,44 @@ func TestLargeCubicRangeAroundPoint(t *testing.T) {
 
 func TestHugeCubicRangeAroundPoint(t *testing.T) {
 	testCubicRange(t, Point{X: 123, Y: -456, Z: 7890}, 1000000)
+}
+
+// Parametrized function to test the random selection of a point on a
+// sphere.
+func testPointOnSphere(t *testing.T, center Point, radius float64) {
+	fmt.Print("Testing sphere around point:", center)
+	fmt.Println(" with radius:", radius)
+	random_point := SelectRandomPointOnSphere(center, radius)
+	fmt.Println("Selected random point:", random_point)
+	distance := Distance(center, random_point)
+	fmt.Println("Distance of the random point from the center:", distance)
+
+	const precision_factor = 0.0001
+	if distance > radius*(1.+precision_factor) || distance < radius*(1.-precision_factor) {
+		t.Errorf("The distance is outside of the permissible range")
+	}
+}
+
+func TestSmallSphereAroundOrigin(t *testing.T) {
+	testPointOnSphere(t, Point{}, 10)
+}
+
+func TestLargeSphereAroundOrigin(t *testing.T) {
+	testPointOnSphere(t, Point{}, 1000)
+}
+
+func TestHugeSphereAroundOrigin(t *testing.T) {
+	testPointOnSphere(t, Point{}, 1000000)
+}
+
+func TestSmallSphereAroundPoint(t *testing.T) {
+	testPointOnSphere(t, Point{X: 123, Y: -456, Z: 7890}, 10)
+}
+
+func TestLargeSphereAroundPoint(t *testing.T) {
+	testPointOnSphere(t, Point{X: 123, Y: -456, Z: 7890}, 1000)
+}
+
+func TestHugeSphereAroundPoint(t *testing.T) {
+	testPointOnSphere(t, Point{X: 123, Y: -456, Z: 7890}, 1000000)
 }
