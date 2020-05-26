@@ -31,13 +31,13 @@ func testCubicRange(t *testing.T, center Point, distance float64) {
 	random_point := SelectRandomPointInCubicRange(center, distance)
 	fmt.Println("Selected random point:", random_point)
 
-	if random_point.X > center.X + distance || random_point.X < center.X - distance {
+	if random_point.X > center.X+distance || random_point.X < center.X-distance {
 		t.Errorf("X-coordinate of random point is out of range")
 	}
-	if random_point.Y > center.Y + distance || random_point.Y < center.Y - distance {
+	if random_point.Y > center.Y+distance || random_point.Y < center.Y-distance {
 		t.Errorf("Y-coordinate of random point is out of range")
 	}
-	if random_point.Z > center.Z + distance || random_point.Z < center.Z - distance {
+	if random_point.Z > center.Z+distance || random_point.Z < center.Z-distance {
 		t.Errorf("Z-coordinate of random point is out of range")
 	}
 }

@@ -52,9 +52,9 @@ func Distance(p1, p2 Point) float64 {
 // each invocation.
 func SelectRandomPointInCubicRange(center Point, distance float64) Point {
 	rand.Seed(time.Now().Unix())
-	return Point {
-		X: center.X + (rand.Float64() - 0.5) * 2 * distance,
-		Y: center.Y + (rand.Float64() - 0.5) * 2 * distance,
-		Z: center.Z + (rand.Float64() - 0.5) * 2 * distance,
+	return Point{
+		X: center.X + (rand.Float64()-0.5)*2*distance,
+		Y: center.Y + (rand.Float64()-0.5)*2*distance,
+		Z: center.Z + (rand.Float64()-0.5)*2*distance,
 	}
 }
