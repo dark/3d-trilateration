@@ -76,7 +76,7 @@ var observations_set_origin = []Range{
 	},
 }
 
-// Test manual iterations over the low-level function with a specific
+// Test manual iterations over the low-level function, with a specific
 // observations set and a static guess.
 func TestIterationsWithStaticGuess(t *testing.T) {
 	guess := Point{X: 20000, Y: -30000, Z: 90000}
@@ -98,7 +98,8 @@ func TestIterationsWithStaticGuess(t *testing.T) {
 }
 
 // Test the high-level function to iterate internally based on the
-// provided parameters.
+// provided parameters, including the specific observations set and a
+// static guess.
 func TestConvergenceWithStaticGuess(t *testing.T) {
 	initial_guess := Point{X: 20000, Y: -30000, Z: 90000}
 	solution := Trilaterate(observations_set_origin, initial_guess,
