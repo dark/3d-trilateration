@@ -58,3 +58,21 @@ func SelectRandomPointInCubicRange(center Point, distance float64) Point {
 		Z: center.Z + (rand.Float64()-0.5)*2*distance,
 	}
 }
+
+// Select a random point on the sphere whose center and radius are
+// provided.
+//
+// Please note that this function re-seeds the global random pool at
+// each invocation.
+func SelectRandomPointOnSphere(center Point, radius float64) Point {
+	rand.Seed(time.Now().Unix())
+	// Azimuth range: [-π; π]
+	azimuth := (rand.Float64() - 0.5) * 2 * math.Pi
+	// Altitude range: [-π/2; π/2]
+	altitude := (rand.Float64() - 0.5) * math.Pi
+	return Point{
+		X: center.X + radius*math.Cos(azimuth)*math.Cos(altitude),
+		Y: center.Y + radius*math.Sin(azimuth)*math.Cos(altitude),
+		Z: center.Z + radius*math.Sin(altitude),
+	}
+}
