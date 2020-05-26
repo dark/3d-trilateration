@@ -96,3 +96,31 @@ func GaussNetwonIteration(observations []Range, current_guess Point) Point {
 
 	return Point{X: beta_s.AtVec(0), Y: beta_s.AtVec(1), Z: beta_s.AtVec(2)}
 }
+
+// Performs trilateration on the provides observations, using
+// initial_guess as the starting point of the algorithm. The algoritm
+// will run iteratively, until either the maximum number of iterations
+// has been reached, or the sum of the squares of the residuals fell
+// under the provided value. Provide max_iterations=0 or a negative
+// min_sum_of_residual_squares to disable either check.
+//
+// Returns the result of the algorithm, that matches the best estimate
+// of the solution when the algorithm converged. Please note that, for
+// some combinations of the input parameters, the algorithm might
+// never converge.
+func Trilaterate(observations []Range, initial_guess Point, max_iterations int, min_sum_of_residual_squares float64) Point {
+	guess := initial_guess
+	for iteration := 1; ; iteration += 1 {
+		guess = GaussNetwonIteration(observations, guess)
+		if max_iterations > 0 && iteration == max_iterations {
+			// Maximum number of iterations reached
+			break
+		}
+		if SumOfResidualSquares(observations, guess) < min_sum_of_residual_squares {
+			// The minimum threshold for the sum of the
+			// squares of the residuals has been reached.
+			break
+		}
+	}
+	return guess
+}

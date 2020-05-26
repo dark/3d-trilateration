@@ -23,71 +23,89 @@ import (
 	"testing"
 )
 
-// Test converge with a specific set of observation and a static
-// guess.
-func TestConvergeWithStaticGuess(t *testing.T) {
+// An arbitrary set of observations that converges close to the
+// origin.
+var observations_set_origin = []Range{
+	{
+		Point{
+			X: -9529.96875,
+			Y: -41.71875,
+			Z: -10613.03125,
+		},
+		14263.89,
+	},
+	{
+		Point{
+			X: -9570.0625,
+			Y: -60.28125,
+			Z: -10585.375,
+		},
+		14270.25,
+	},
+	{
+		Point{
+			X: -9617.125,
+			Y: -76.59375,
+			Z: -10570.6875,
+		},
+		14291.06,
+	},
+	{
+		Point{
+			X: -9662.1875,
+			Y: -80.34375,
+			Z: -10544.375,
+		},
+		14302.03,
+	},
+	{
+		Point{
+			X: -9674.40625,
+			Y: -81.4375,
+			Z: -10528.3437,
+		},
+		14298.49,
+	},
+	{
+		Point{
+			X: -9780.125,
+			Y: 9.75,
+			Z: -10414.21875,
+		},
+		14286.60,
+	},
+}
+
+// Test manual iterations over the low-level function with a specific
+// observations set and a static guess.
+func TestIterationsWithStaticGuess(t *testing.T) {
 	guess := Point{X: 20000, Y: -30000, Z: 90000}
-	observations := []Range{
-		{
-			Point{
-				X: -9529.96875,
-				Y: -41.71875,
-				Z: -10613.03125,
-			},
-			14263.89,
-		},
-		{
-			Point{
-				X: -9570.0625,
-				Y: -60.28125,
-				Z: -10585.375,
-			},
-			14270.25,
-		},
-		{
-			Point{
-				X: -9617.125,
-				Y: -76.59375,
-				Z: -10570.6875,
-			},
-			14291.06,
-		},
-		{
-			Point{
-				X: -9662.1875,
-				Y: -80.34375,
-				Z: -10544.375,
-			},
-			14302.03,
-		},
-		{
-			Point{
-				X: -9674.40625,
-				Y: -81.4375,
-				Z: -10528.3437,
-			},
-			14298.49,
-		},
-		{
-			Point{
-				X: -9780.125,
-				Y: 9.75,
-				Z: -10414.21875,
-			},
-			14286.60,
-		},
-	}
 
 	fmt.Println("Initial guess:", guess)
-	fmt.Println("Sum of squares:", SumOfResidualSquares(observations, guess))
+	fmt.Println("Sum of squares:", SumOfResidualSquares(observations_set_origin, guess))
 	for i := 0; i < 20; i += 1 {
-		fmt.Println("\nIteration:", i)
-		guess = GaussNetwonIteration(observations, guess)
+		fmt.Println("Iteration:", i)
+		guess = GaussNetwonIteration(observations_set_origin, guess)
 		fmt.Println("   New guess:", guess)
-		fmt.Println("   Sum of squares:", SumOfResidualSquares(observations, guess))
+		fmt.Println("   Sum of squares of the residuals:",
+			SumOfResidualSquares(observations_set_origin, guess))
 	}
 
-	final_sum_of_squares := SumOfResidualSquares(observations, guess)
+	final_sum_of_squares := SumOfResidualSquares(observations_set_origin, guess)
+	if final_sum_of_squares > 1 {
+		t.Errorf("Final sum of squares is too high: %f", final_sum_of_squares)
+	}
+}
+
+// Test the high-level function to iterate internally based on the
+// provided parameters.
+func TestConvergenceWithStaticGuess(t *testing.T) {
+	initial_guess := Point{X: 20000, Y: -30000, Z: 90000}
+	solution := Trilaterate(observations_set_origin, initial_guess,
+		100 /*max_iterations*/, 1 /*min_sum_of_residual_squares*/)
+	final_sum_of_squares := SumOfResidualSquares(observations_set_origin, solution)
+	fmt.Println("Solution:", solution)
+	fmt.Println("Sum of squares of the residuals:", SumOfResidualSquares(observations_set_origin, solution))
 	if final_sum_of_squares > 1 {
 		t.Errorf("Final sum of squares is too high: %f", final_sum_of_squares)
 	}
