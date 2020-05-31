@@ -153,7 +153,6 @@ var test_observations = []testObservation{
 		},
 		expected_solution: Point{-9529.437, -64.5, -7428.4375},
 	},
-	/* TBA
 	{
 		measurements: []Range{
 			{s1, 3911.65},
@@ -164,9 +163,8 @@ var test_observations = []testObservation{
 			{s6, 3632.56},
 			{s7, 3511.50},
 		},
-		expected_solution: Point{},
+		expected_solution: Point{-13243.15625, 1026.5625, -10003.09375},
 	},
-	*/
 }
 
 // Parametric function to test one observation, given some parameters.
