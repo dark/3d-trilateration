@@ -3,4 +3,4 @@ all:
 test:
 	go test -v ./...
 format:
-	find  -name '*.go' | xargs -n 1 gofmt -w
+	find  -name '*.go' | xargs gofmt -s -w

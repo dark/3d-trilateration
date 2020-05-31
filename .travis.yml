@@ -9,3 +9,5 @@ jobs:
       script: make
     - stage: "Test"
       script: make test
+    - stage: "Lint"
+      script: make lint
