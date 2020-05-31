@@ -10,4 +10,7 @@ multilateration"](https://en.wikipedia.org/wiki/True_range_multilateration).
 
 The implementation uses the [Gauss-Newton
 algorithm](https://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm)
-to iteratively look for estimates that are closer and closer to the solution.
+to solve a nonlinear least squares problem. In practice, the algorithm
+looks iteratively for estimates of the solution that are closer and
+closer to the actual solution. This is better suited to account for
+inaccuracies in the measurements of distances and locations.
