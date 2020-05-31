@@ -1,4 +1,4 @@
-# 3d-trilateration: a library for three-dimensional space trilateration [![Build status](https://github.com/dark/3d-trilateration/workflows/Go/badge.svg)](https://github.com/dark/3d-trilateration/actions?query=workflow%3AGo)
+# 3d-trilateration: a library for three-dimensional space trilateration [![Workflow status](https://github.com/dark/3d-trilateration/workflows/Go/badge.svg)](https://github.com/dark/3d-trilateration/actions?query=workflow%3AGo) [![Build Status](https://travis-ci.org/dark/3d-trilateration.svg?branch=master)](https://travis-ci.org/dark/3d-trilateration)
 
 This library provides utilities to perform **trilateration** (also
 known as **true range multilateration**) in a **three-dimensional
