@@ -1,4 +1,4 @@
-all:
+build:
 	go build -v ./...
 test:
 	go test -v ./...
@@ -13,3 +13,5 @@ lint:
 		echo "Please run 'gofmt -s -d' on the affected files, or apply the patch above."; \
 		exit 1; \
 		fi
+
+.PHONY: build test format lint
