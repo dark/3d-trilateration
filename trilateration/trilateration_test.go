@@ -141,7 +141,6 @@ var test_observations = []testObservation{
 		},
 		expected_solution: Point{6.25, -1.28125, -5.75},
 	},
-	/* TBA
 	{
 		measurements: []Range{
 			{s1, 3184.68},
@@ -152,8 +151,9 @@ var test_observations = []testObservation{
 			{s6, 2997.21},
 			{s7, 3037.08},
 		},
-		expected_solution: Point{},
+		expected_solution: Point{-9529.437, -64.5, -7428.4375},
 	},
+	/* TBA
 	{
 		measurements: []Range{
 			{s1, 3911.65},
