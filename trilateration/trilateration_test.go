@@ -98,8 +98,11 @@ func TestIterationsWithStaticGuess(t *testing.T) {
 // static guess.
 func TestConvergenceWithStaticGuess(t *testing.T) {
 	initial_guess := Point{X: 20000, Y: -30000, Z: 90000}
-	solution := Trilaterate(observations_set_origin, initial_guess,
+	solution, err := Trilaterate(observations_set_origin, initial_guess,
 		100 /*max_iterations*/, 1 /*min_sum_of_residual_squares*/)
+	if err != nil {
+		t.Errorf("Error should be nil, found instead: %s", err)
+	}
 	final_sum_of_squares := SumOfResidualSquares(observations_set_origin, solution)
 	fmt.Println("Solution:", solution)
 	fmt.Println("Sum of squares of the residuals:", final_sum_of_squares)
@@ -170,8 +173,12 @@ var test_observations = []testObservation{
 // Parametric function to test one observation, given some parameters.
 func testOneObservation(t *testing.T, observation testObservation, initial_guess Point, min_sum_of_residual_squares float64) {
 	// Solve
-	solution := Trilaterate(observation.measurements, initial_guess,
+	solution, err := Trilaterate(observation.measurements, initial_guess,
 		100 /*max_iterations*/, min_sum_of_residual_squares)
+	if err != nil {
+		t.Errorf("Error should be nil, found instead: %s", err)
+	}
+
 	fmt.Println("  Actual solution:", solution)
 
 	// Check the solution

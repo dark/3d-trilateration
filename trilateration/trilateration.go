@@ -23,6 +23,7 @@
 package trilateration
 
 import (
+	"fmt"
 	"gonum.org/v1/gonum/mat"
 	"math"
 )
@@ -106,27 +107,28 @@ func GaussNetwonIteration(observations []Range, current_guess Point) Point {
 //
 // Returns the result of the algorithm, that matches the best estimate
 // of the solution when the algorithm converged. Please note that, for
-// some combinations of the input parameters, the algorithm might
-// never converge.
+// some combinations of the input parameters, the algorithm might not
+// converge; in that case, the returned error is non-nil.
 //
 // The choice of the initial guess is very important for the
 // convergence of the algorithm. Some choices might render the problem
 // ill-conditioned. As such, this library provides some helper APIs
 // that can help randomize the choice of the initial guess; please
 // refer to space.go for more details.
-func Trilaterate(observations []Range, initial_guess Point, max_iterations int, min_sum_of_residual_squares float64) Point {
+func Trilaterate(observations []Range, initial_guess Point, max_iterations int, min_sum_of_residual_squares float64) (Point, error) {
 	guess := initial_guess
 	for iteration := 1; ; iteration += 1 {
 		guess = GaussNetwonIteration(observations, guess)
 		if max_iterations > 0 && iteration == max_iterations {
-			// Maximum number of iterations reached
-			break
+			// Maximum number of iterations
+			// reached. Return partial guess and error
+			// condition.
+			return guess, fmt.Errorf("Trilaterate: reached maximum number of iterations %d", max_iterations)
 		}
 		if SumOfResidualSquares(observations, guess) < min_sum_of_residual_squares {
 			// The minimum threshold for the sum of the
 			// squares of the residuals has been reached.
-			break
+			return guess, nil
 		}
 	}
-	return guess
 }
